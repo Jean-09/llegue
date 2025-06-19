@@ -1,0 +1,14 @@
+{
+  "kind": "collectionType",
+  "collectionName": "docentes",
+  "info": {
+    "singularName": "docente",
+    "pluralName": "docentes",
+    "displayName": "docente"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {}
+}
