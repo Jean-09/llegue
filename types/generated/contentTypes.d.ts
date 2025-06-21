@@ -397,6 +397,10 @@ export interface ApiAlumnoAlumno extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     nombre: Schema.Attribute.String & Schema.Attribute.Required;
+    persona_autorizadas: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::persona-autorizada.persona-autorizada'
+    >;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -486,6 +490,7 @@ export interface ApiPersonaAutorizadaPersonaAutorizada
     draftAndPublish: true;
   };
   attributes: {
+    alumnos: Schema.Attribute.Relation<'manyToMany', 'api::alumno.alumno'>;
     apellidos: Schema.Attribute.String & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

@@ -30,6 +30,12 @@
     "Estatus": {
       "type": "boolean",
       "required": true
+    },
+    "persona_autorizadas": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::persona-autorizada.persona-autorizada",
+      "inversedBy": "alumnos"
     }
   }
 }

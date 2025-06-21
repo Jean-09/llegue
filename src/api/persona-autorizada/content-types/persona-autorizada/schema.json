@@ -47,6 +47,12 @@
     "Domicilio": {
       "type": "text",
       "required": true
+    },
+    "alumnos": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::alumno.alumno",
+      "mappedBy": "persona_autorizadas"
     }
   }
 }
