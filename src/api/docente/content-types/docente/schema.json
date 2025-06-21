@@ -31,11 +31,10 @@
       "relation": "oneToMany",
       "target": "api::alumno.alumno"
     },
-    "users": {
+    "user": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "plugin::users-permissions.user",
-      "mappedBy": "docente"
+      "target": "plugin::users-permissions.user"
     }
   }
 }
