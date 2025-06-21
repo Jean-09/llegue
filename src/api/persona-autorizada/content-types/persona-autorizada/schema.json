@@ -19,10 +19,6 @@
       "type": "string",
       "required": true
     },
-    "telefono": {
-      "type": "string",
-      "required": true
-    },
     "foto": {
       "type": "media",
       "multiple": false,
@@ -43,6 +39,14 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
+    },
+    "telefono": {
+      "type": "biginteger",
+      "required": true
+    },
+    "Domicilio": {
+      "type": "text",
+      "required": true
     }
   }
 }

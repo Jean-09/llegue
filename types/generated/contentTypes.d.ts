@@ -384,15 +384,19 @@ export interface ApiAlumnoAlumno extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    apellido: Schema.Attribute.String & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    Estatus: Schema.Attribute.Boolean & Schema.Attribute.Required;
+    foto: Schema.Attribute.Media<'images', true> & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::alumno.alumno'
     > &
       Schema.Attribute.Private;
+    nombre: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -403,7 +407,7 @@ export interface ApiAlumnoAlumno extends Struct.CollectionTypeSchema {
 export interface ApiDocenteDocente extends Struct.CollectionTypeSchema {
   collectionName: 'docentes';
   info: {
-    displayName: 'docente';
+    displayName: 'Docente';
     pluralName: 'docentes';
     singularName: 'docente';
   };
@@ -411,39 +415,58 @@ export interface ApiDocenteDocente extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    alumnos: Schema.Attribute.Relation<'oneToMany', 'api::alumno.alumno'>;
+    apellido: Schema.Attribute.String & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    foto: Schema.Attribute.Media<'images', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::docente.docente'
     > &
       Schema.Attribute.Private;
+    nombre: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    users: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
   };
 }
 
-export interface ApiGrupoGrupo extends Struct.CollectionTypeSchema {
-  collectionName: 'grupos';
+export interface ApiLlegadaLlegada extends Struct.CollectionTypeSchema {
+  collectionName: 'llegadas';
   info: {
-    displayName: 'Grupo';
-    pluralName: 'grupos';
-    singularName: 'grupo';
+    displayName: 'Llegada';
+    pluralName: 'llegadas';
+    singularName: 'llegada';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
+    alumno: Schema.Attribute.Relation<'oneToOne', 'api::alumno.alumno'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    docente: Schema.Attribute.Relation<'oneToOne', 'api::docente.docente'>;
+    horaEntrega: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    horaLlegada: Schema.Attribute.DateTime & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::grupo.grupo'> &
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::llegada.llegada'
+    > &
       Schema.Attribute.Private;
+    persona_autorizada: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::persona-autorizada.persona-autorizada'
+    >;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -469,6 +492,7 @@ export interface ApiPersonaAutorizadaPersonaAutorizada
       Schema.Attribute.Private;
     documentooficial: Schema.Attribute.Media<'images', true> &
       Schema.Attribute.Required;
+    Domicilio: Schema.Attribute.Text & Schema.Attribute.Required;
     foto: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -478,7 +502,7 @@ export interface ApiPersonaAutorizadaPersonaAutorizada
       Schema.Attribute.Private;
     nombre: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    telefono: Schema.Attribute.String & Schema.Attribute.Required;
+    telefono: Schema.Attribute.BigInteger & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -486,6 +510,33 @@ export interface ApiPersonaAutorizadaPersonaAutorizada
       'oneToOne',
       'plugin::users-permissions.user'
     >;
+  };
+}
+
+export interface ApiSalonSalon extends Struct.CollectionTypeSchema {
+  collectionName: 'salons';
+  info: {
+    displayName: 'Salon';
+    pluralName: 'salons';
+    singularName: 'salon';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    alumnos: Schema.Attribute.Relation<'oneToMany', 'api::alumno.alumno'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    docente: Schema.Attribute.Relation<'oneToOne', 'api::docente.docente'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::salon.salon'> &
+      Schema.Attribute.Private;
+    Numero: Schema.Attribute.BigInteger & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -952,6 +1003,7 @@ export interface PluginUsersPermissionsUser
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    docente: Schema.Attribute.Relation<'oneToOne', 'api::docente.docente'>;
     email: Schema.Attribute.Email &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
@@ -999,8 +1051,9 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::alumno.alumno': ApiAlumnoAlumno;
       'api::docente.docente': ApiDocenteDocente;
-      'api::grupo.grupo': ApiGrupoGrupo;
+      'api::llegada.llegada': ApiLlegadaLlegada;
       'api::persona-autorizada.persona-autorizada': ApiPersonaAutorizadaPersonaAutorizada;
+      'api::salon.salon': ApiSalonSalon;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

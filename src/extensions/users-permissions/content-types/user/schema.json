@@ -65,6 +65,12 @@
       "target": "plugin::users-permissions.role",
       "inversedBy": "users",
       "configurable": false
+    },
+    "docente": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::docente.docente",
+      "inversedBy": "users"
     }
   }
 }
