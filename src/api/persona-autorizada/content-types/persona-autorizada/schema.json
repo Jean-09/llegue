@@ -53,6 +53,10 @@
       "relation": "manyToMany",
       "target": "api::alumno.alumno",
       "mappedBy": "persona_autorizadas"
+    },
+    "estatus": {
+      "type": "boolean",
+      "required": true
     }
   }
 }

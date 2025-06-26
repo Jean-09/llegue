@@ -24,6 +24,10 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::alumno.alumno"
+    },
+    "estado": {
+      "type": "boolean",
+      "required": true
     }
   }
 }

@@ -424,6 +424,7 @@ export interface ApiDocenteDocente extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    estatus: Schema.Attribute.Boolean & Schema.Attribute.Required;
     foto: Schema.Attribute.Media<'images', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -498,6 +499,7 @@ export interface ApiPersonaAutorizadaPersonaAutorizada
     documentooficial: Schema.Attribute.Media<'images', true> &
       Schema.Attribute.Required;
     Domicilio: Schema.Attribute.Text & Schema.Attribute.Required;
+    estatus: Schema.Attribute.Boolean & Schema.Attribute.Required;
     foto: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -534,6 +536,7 @@ export interface ApiSalonSalon extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     docente: Schema.Attribute.Relation<'oneToOne', 'api::docente.docente'>;
+    estado: Schema.Attribute.Boolean & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::salon.salon'> &
       Schema.Attribute.Private;
