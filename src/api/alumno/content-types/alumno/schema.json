@@ -36,6 +36,12 @@
       "relation": "manyToMany",
       "target": "api::persona-autorizada.persona-autorizada",
       "inversedBy": "alumnos"
+    },
+    "docente": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::docente.docente",
+      "inversedBy": "alumnos"
     }
   }
 }

@@ -26,11 +26,6 @@
         "images"
       ]
     },
-    "alumnos": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::alumno.alumno"
-    },
     "user": {
       "type": "relation",
       "relation": "oneToOne",
@@ -39,6 +34,12 @@
     "estatus": {
       "type": "boolean",
       "required": true
+    },
+    "alumnos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::alumno.alumno",
+      "mappedBy": "docente"
     }
   }
 }

@@ -388,6 +388,7 @@ export interface ApiAlumnoAlumno extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    docente: Schema.Attribute.Relation<'manyToOne', 'api::docente.docente'>;
     Estatus: Schema.Attribute.Boolean & Schema.Attribute.Required;
     foto: Schema.Attribute.Media<'images', true> & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
