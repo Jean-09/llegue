@@ -40,6 +40,12 @@
       "relation": "oneToMany",
       "target": "api::alumno.alumno",
       "mappedBy": "docente"
+    },
+    "llegada": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::llegada.llegada",
+      "inversedBy": "docente"
     }
   }
 }

@@ -391,6 +391,7 @@ export interface ApiAlumnoAlumno extends Struct.CollectionTypeSchema {
     docente: Schema.Attribute.Relation<'manyToOne', 'api::docente.docente'>;
     Estatus: Schema.Attribute.Boolean & Schema.Attribute.Required;
     foto: Schema.Attribute.Media<'images', true> & Schema.Attribute.Required;
+    llegada: Schema.Attribute.Relation<'oneToOne', 'api::llegada.llegada'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -427,6 +428,7 @@ export interface ApiDocenteDocente extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     estatus: Schema.Attribute.Boolean & Schema.Attribute.Required;
     foto: Schema.Attribute.Media<'images', true>;
+    llegada: Schema.Attribute.Relation<'oneToOne', 'api::llegada.llegada'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -502,6 +504,7 @@ export interface ApiPersonaAutorizadaPersonaAutorizada
     Domicilio: Schema.Attribute.Text & Schema.Attribute.Required;
     estatus: Schema.Attribute.Boolean & Schema.Attribute.Required;
     foto: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    llegada: Schema.Attribute.Relation<'oneToOne', 'api::llegada.llegada'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

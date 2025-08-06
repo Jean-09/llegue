@@ -22,17 +22,20 @@
     "alumno": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::alumno.alumno"
+      "target": "api::alumno.alumno",
+      "mappedBy": "llegada"
     },
     "docente": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::docente.docente"
+      "target": "api::docente.docente",
+      "mappedBy": "llegada"
     },
     "persona_autorizada": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::persona-autorizada.persona-autorizada"
+      "target": "api::persona-autorizada.persona-autorizada",
+      "mappedBy": "llegada"
     }
   }
 }

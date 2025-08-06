@@ -26,7 +26,7 @@ export default factories.createCoreController('api::alumno.alumno', {
         const results = await super.find(ctx);
         return results
         }
-        if(ctx.state.user.role.type === 'Administrador'){
+        if(ctx.state.user.role.type === 'administrador'){
             const results = await super.find(ctx);
             return results
         }

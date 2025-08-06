@@ -42,6 +42,12 @@
       "relation": "manyToOne",
       "target": "api::docente.docente",
       "inversedBy": "alumnos"
+    },
+    "llegada": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::llegada.llegada",
+      "inversedBy": "alumno"
     }
   }
 }

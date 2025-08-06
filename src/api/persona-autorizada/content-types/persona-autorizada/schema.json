@@ -57,6 +57,12 @@
     "estatus": {
       "type": "boolean",
       "required": true
+    },
+    "llegada": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::llegada.llegada",
+      "inversedBy": "persona_autorizada"
     }
   }
 }
