@@ -48,6 +48,24 @@
       "relation": "oneToOne",
       "target": "api::llegada.llegada",
       "inversedBy": "alumno"
+    },
+    "entregases": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::entregas.entregas",
+      "mappedBy": "alumno"
+    },
+    "salon": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::salon.salon",
+      "inversedBy": "alumnos"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "alumnos"
     }
   }
 }

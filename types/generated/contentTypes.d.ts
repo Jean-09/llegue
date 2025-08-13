@@ -389,6 +389,10 @@ export interface ApiAlumnoAlumno extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     docente: Schema.Attribute.Relation<'manyToOne', 'api::docente.docente'>;
+    entregases: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::entregas.entregas'
+    >;
     Estatus: Schema.Attribute.Boolean & Schema.Attribute.Required;
     foto: Schema.Attribute.Media<'images', true> & Schema.Attribute.Required;
     llegada: Schema.Attribute.Relation<'oneToOne', 'api::llegada.llegada'>;
@@ -404,9 +408,14 @@ export interface ApiAlumnoAlumno extends Struct.CollectionTypeSchema {
       'api::persona-autorizada.persona-autorizada'
     >;
     publishedAt: Schema.Attribute.DateTime;
+    salon: Schema.Attribute.Relation<'manyToOne', 'api::salon.salon'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
   };
 }
 
@@ -437,6 +446,7 @@ export interface ApiDocenteDocente extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     nombre: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
+    salon: Schema.Attribute.Relation<'oneToOne', 'api::salon.salon'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -444,6 +454,40 @@ export interface ApiDocenteDocente extends Struct.CollectionTypeSchema {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
+  };
+}
+
+export interface ApiEntregasEntregas extends Struct.CollectionTypeSchema {
+  collectionName: 'entregases';
+  info: {
+    displayName: 'entregas';
+    pluralName: 'entregases';
+    singularName: 'entregas';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    alumno: Schema.Attribute.Relation<'manyToOne', 'api::alumno.alumno'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    descripcion: Schema.Attribute.Text;
+    estado: Schema.Attribute.Enumeration<
+      ['Pendiente', 'Revisado', 'Aprobado', 'Rechazado']
+    >;
+    fecha_entrega: Schema.Attribute.DateTime;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::entregas.entregas'
+    > &
+      Schema.Attribute.Private;
+    nombre_entrega: Schema.Attribute.Text;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -1009,6 +1053,7 @@ export interface PluginUsersPermissionsUser
     draftAndPublish: false;
   };
   attributes: {
+    alumnos: Schema.Attribute.Relation<'oneToMany', 'api::alumno.alumno'>;
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -1033,6 +1078,8 @@ export interface PluginUsersPermissionsUser
       }>;
     provider: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    requirePasswordChange: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<true>;
     resetPasswordToken: Schema.Attribute.String & Schema.Attribute.Private;
     role: Schema.Attribute.Relation<
       'manyToOne',
@@ -1062,6 +1109,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::alumno.alumno': ApiAlumnoAlumno;
       'api::docente.docente': ApiDocenteDocente;
+      'api::entregas.entregas': ApiEntregasEntregas;
       'api::llegada.llegada': ApiLlegadaLlegada;
       'api::persona-autorizada.persona-autorizada': ApiPersonaAutorizadaPersonaAutorizada;
       'api::salon.salon': ApiSalonSalon;

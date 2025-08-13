@@ -25,7 +25,7 @@ export default factories.createCoreController('api::docente.docente', {
         const results = await super.find(ctx);
         return results
         }
-        if(ctx.state.user.role.type === 'administrador'){
+        if(ctx.state.user.role.type === 'administrador' || ctx.state.user.role.type === 'docente'){
             const results = await super.find(ctx);
             return results
         }

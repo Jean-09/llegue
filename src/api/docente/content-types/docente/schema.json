@@ -46,6 +46,12 @@
       "relation": "oneToOne",
       "target": "api::llegada.llegada",
       "inversedBy": "docente"
+    },
+    "salon": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::salon.salon",
+      "inversedBy": "docente"
     }
   }
 }

@@ -18,12 +18,14 @@
     "docente": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::docente.docente"
+      "target": "api::docente.docente",
+      "mappedBy": "salon"
     },
     "alumnos": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::alumno.alumno"
+      "target": "api::alumno.alumno",
+      "mappedBy": "salon"
     },
     "estado": {
       "type": "boolean",

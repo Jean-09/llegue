@@ -65,6 +65,16 @@
       "target": "plugin::users-permissions.role",
       "inversedBy": "users",
       "configurable": false
+    },
+    "requirePasswordChange": {
+      "type": "boolean",
+      "default": true
+    },
+    "alumnos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::alumno.alumno",
+      "mappedBy": "user"
     }
   }
 }

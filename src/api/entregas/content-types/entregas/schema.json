@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "entregases",
+  "info": {
+    "singularName": "entregas",
+    "pluralName": "entregases",
+    "displayName": "entregas"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nombre_entrega": {
+      "type": "text"
+    },
+    "descripcion": {
+      "type": "text"
+    },
+    "fecha_entrega": {
+      "type": "datetime"
+    },
+    "estado": {
+      "type": "enumeration",
+      "enum": [
+        "Pendiente",
+        "Revisado",
+        "Aprobado",
+        "Rechazado"
+      ]
+    },
+    "alumno": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::alumno.alumno",
+      "inversedBy": "entregases"
+    }
+  }
+}
