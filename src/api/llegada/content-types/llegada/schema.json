@@ -13,11 +13,11 @@
   "attributes": {
     "horaLlegada": {
       "type": "datetime",
-      "required": true
+      "required": false
     },
     "horaEntrega": {
       "type": "datetime",
-      "required": true
+      "required": false
     },
     "alumno": {
       "type": "relation",
@@ -36,6 +36,14 @@
       "relation": "oneToOne",
       "target": "api::persona-autorizada.persona-autorizada",
       "mappedBy": "llegada"
+    },
+    "estado": {
+      "type": "enumeration",
+      "enum": [
+        "Llegando",
+        "Entregado",
+        "Cancelado"
+      ]
     }
   }
 }

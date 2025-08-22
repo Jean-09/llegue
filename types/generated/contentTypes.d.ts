@@ -412,10 +412,6 @@ export interface ApiAlumnoAlumno extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    user: Schema.Attribute.Relation<
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
   };
 }
 
@@ -507,8 +503,11 @@ export interface ApiLlegadaLlegada extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     docente: Schema.Attribute.Relation<'oneToOne', 'api::docente.docente'>;
-    horaEntrega: Schema.Attribute.DateTime & Schema.Attribute.Required;
-    horaLlegada: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    estado: Schema.Attribute.Enumeration<
+      ['Llegando', 'Entregado', 'Cancelado']
+    >;
+    horaEntrega: Schema.Attribute.DateTime;
+    horaLlegada: Schema.Attribute.DateTime;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1053,13 +1052,13 @@ export interface PluginUsersPermissionsUser
     draftAndPublish: false;
   };
   attributes: {
-    alumnos: Schema.Attribute.Relation<'oneToMany', 'api::alumno.alumno'>;
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    docente: Schema.Attribute.Relation<'oneToOne', 'api::docente.docente'>;
     email: Schema.Attribute.Email &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{

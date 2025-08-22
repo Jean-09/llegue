@@ -70,11 +70,10 @@
       "type": "boolean",
       "default": true
     },
-    "alumnos": {
+    "docente": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::alumno.alumno",
-      "mappedBy": "user"
+      "relation": "oneToOne",
+      "target": "api::docente.docente"
     }
   }
 }
